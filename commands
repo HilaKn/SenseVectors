@@ -1,0 +1,59 @@
+python adjectives_clustering.py /home/nlp/data/wikipedia/wikipedia.wcase.nodups.parsed.fixed.gz models/normed_we_300_5 wiki_update_with_labels
+
+python adjectives_clustering_v2.py /home/nlp/data/wikipedia/wikipedia.wcase.nodups.parsed.fixed.gz models/normed_we_300_5 wiki_update_with_labels
+
+python only_adj_senses.py HeiPLAS-release/HeiPLAS-dev.txt HeiPLAS-release/HeiPLAS-test.txt /home/nlp/hilak/code/senses/models/we_labeled_adj_300_5 /home/nlp/hilak/code/senses/output_v4/filtered_adj_dic /home/nlp/hilak/code/senses/output_v4/adj_clusters /home/nlp/hilak/code/senses/output_v4/results
+
+python we_trainer.py wiki_sentences models/we_wiki -p
+
+python adj_noun_senses.py /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-dev.txt /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-test.txt /home/nlp/hilak/code/senses/output_v4/we_v4/we_v4_labeled_300_5_normed /home/nlp/hilak/code/senses/output_v4/filtered_adj_dic /home/nlp/hilak/code/senses/output_v4/adj_clusters /home/nlp/hilak/code/senses/output_v4/adj_noun_res
+
+python adj_clustering_v4.py /home/nlp/data/wikipedia/wikipedia.wcase.nodups.parsed.fixed.gz wiki_sentences models/normed_we_wiki_300_5 wiki_sentences_labeled_v4_400_thr
+
+python we_trainer.py output_v4_400_thr/wiki_sentences_labeled_v4_1000_thr output_v4_1000_thr/we_wiki_1000_thr -p
+
+
+python we_trainer.py output_v4_1000_thr/wiki_sentences_labeled_v4_400_thr output_v4_400_thr/we_wiki_400_thr -p
+python adj_clustering_v5.py ../wiki_sentences ../models/normed_we_wiki_300_5 wiki_sentences_labeled_v5_1000_thr -a
+
+
+python only_adj_senses.py /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-dev.txt /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-test.txt /home/nlp/hilak/code/senses/output_v4_400_thr
+/we_wiki_400_thr_300_5_normed /home/nlp/hilak/code/senses/output_v4_400_thr/filtered_adj_dic /home/nlp/hilak/code/senses/output_v4_400_thr/adj_clusters /home/nlp/hilak/code/senses/output_v4_400_thr/only_adj_res
+
+
+
+python we_trainer.py output_v5/wiki_sentences_labeled_v5_1000_thr output_v5/we_wiki_400_thr -p
+
+
+/home/nlp/hilak/code/senses/v5/output_v5/wiki_sentences_labeled_v5_1000_thr
+
+python only_adj_senses.py /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-dev.txt /home/nlp/hilak/data/HeiPLAS-release/HeiPLAS-test.txt v5/output_v5/we_wiki_1000_thr_300_5_normed v5/output_v5/filtered_adj_dic v5/output_v5/adj_clusters v5/output_v5/only_adj_res
+
+
+python save_adj_dict_v6.py /home/nlp/data/wikipedia/wikipedia.wcase.nodups.parsed.fixed.gz ../models/normed_we_wiki_300_5
+
+python adj_clustering_v7.py ../wiki_sentences ../models/normed_we_wiki_300_5 wiki_update_with_labels_v7 -a
+
+python we_trainer.py output_v7/wiki_update_with_labels_v7 output_v7/we_wiki_1000_HeiPLAS_v7 -p
+
+
+python eval_only_adj_senses_v7.py /../../../data/HeiPLAS-release/HeiPLAS-dev.txt /../../../data/HeiPLAS-release/HeiPLAS-test.txt output_v7/we_wiki_1000_HeiPLAS_v7_normed output_v7/multi_sense_adj output_v7/adj_clusters output_v7/only_adj_res
+
+
+running local
+-------------
+adj_list_generator_v9.py
+../mount/home/nlp/hilak/code/senses/v7/adj_dic_folder_pickle
+multi_sense_adj_list
+
+eval_only_adj_senses_v9.py parameters:
+../../../dataset/HeiPLAS-release/HeiPLAS-dev.txt
+../../../dataset/HeiPLAS-release/HeiPLAS-test.txt
+../mount/home/nlp/hilak/code/senses/v7/output_v7/we_wiki_1000_HeiPLAS_v7_normed
+../mount/home/nlp/hilak/code/senses/v7/multi_sense_adj_list
+../mount/home/nlp/hilak/code/senses/v7/adj_dic_folder_pickle
+output_v9
+../mount/home/nlp/hilak/code/senses/models/normed_we_wiki_300_5
+
+python adj_clustering_v25.py ../wiki_sentences ../models/normed_we_wiki_300_5 wiki_update_with_labels_v25 -a
+
